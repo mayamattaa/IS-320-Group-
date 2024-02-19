@@ -13,25 +13,25 @@ order_id_counter = 10001
 # Functions
 def login():
     # Implement login functionality
-    login_type = int(input('Choose 1 for manager, 0 for customer > '))
-    if login_type == '1':
+    login_type = int(input('Choose 1 for manager, 0 for customer: '))
+    if login_type == 1:
         user_id = input('Enter manager ID:')
         password = input('Enter manager password:')
         if user_id in managers and managers[user_id] == password:
             return 'manager', user_id
         else:
-            print('Invalid ID or password.')
+            print('Invalid manager ID or password.')
             return None, None
-    elif login_type == '0':
-        user_id = input('Enter your customer ID')
-        password = input('Enter your customer password')
+    elif login_type == 0:
+        user_id = input('Enter your customer ID:')
+        password = input('Enter your customer password:')
         if user_id in customers and customers[user_id] == password:
             return 'customer', user_id
         else:
-            print('Invalid ID or password.')
+            print('Invalid customer ID or password.')
             return None, None
     else:
-        print('Invalid login type. Choose 1 for manager , or 0 for customer.')
+        print('Invalid login type. Choose 1 for manager, or 0 for customer.')
         return None, None
 
 
