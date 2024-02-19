@@ -13,7 +13,6 @@ order_id_counter = 10001
 
 
 # functions
-
 def login():
     # Implement login functionality
     login_type = int(input('Choose 1 for manager, 0 for customer: '))
@@ -133,6 +132,7 @@ def submit_order(customer_id):
         if quantity <= products[product_id]['stock']:
             order_id = order_id_counter
             order_id_counter += 1
+            order_date = get_date()
             order_price = quantity * products[product_id]['unit_price']
             product_name = products[product_id]['name']
             order = {
@@ -141,7 +141,8 @@ def submit_order(customer_id):
                 'product_id': product_id,
                 'quantity': quantity,
                 'order_price': order_price,
-                'name': product_name
+                'name': product_name,
+                'date': order_date
             }
             orders.append(order)
             print("Order placed successfully!")
@@ -156,11 +157,14 @@ def update_stock(product_id, quantity):
     products[product_id]['stock'] -= quantity
 
 def print_order(order):
-    print("Order Details:")
-    print(f"Order ID: {order['order_id']}")
-    print(f"Product ID: {order['product_id']}")
-    print(f"Quantity: {order['quantity']}")
-    print(f"Total Price: ${order['order_price']:.2f}")
+    print('Order Details:')
+    print(f'Order ID: {order['order_id']}')
+    print(f'Product ID: {order['product_id']}')
+    print(f'Quantity: {order['quantity']}')
+    print(f'Total Price: ${order['order_price']:.2f}')
+    print(f'Product Name: {order['name']}')
+    
+    
 
 def customer_view_orders(customer_id):
     print("Orders placed by you:")
