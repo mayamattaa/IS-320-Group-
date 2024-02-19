@@ -1,18 +1,16 @@
-# Global Variables
+#globals
 customers = {'customer1_id': 'customer1_pass', 'customer2_id': 'customer2_pass'}
 managers = {'manager_id': 'manager_pass'}
 products = {
     'RD001': {'name': 'Red Dress', 'unit_price': 5.0, 'stock': 100},
     'BS001': {'name': 'Blue Shoes', 'unit_price': 10.0, 'stock': 50},
     'BS002': {'name': 'Black Shirt', 'unit_price': 5.00, 'stock': 25},
-    # Add more products as needed
 }
 orders = []
 order_id_counter = 10001
 
-# Functions
+# functions
 def login():
-    # Implement login functionality
     user_id = input("Enter your ID: ")
     password = input("Enter your password: ")
     if user_id in customers and customers[user_id] == password:
@@ -24,7 +22,6 @@ def login():
         return None, None
 
 def customer_menu(customer_id):
-    # Implement customer menu options: submit order, view order history, logout
     global orders
     while True:
         print("Customer Menu:")
@@ -32,14 +29,13 @@ def customer_menu(customer_id):
         if choice == '1':
             submit_order(customer_id)
         elif choice == '2':
-            display_order_history(customer_id)
+            customer_view_orders(customer_id)
         elif choice == '3':
             break
         else:
             print("Invalid choice.")
 
 def manager_menu(manager_id):
-    # Implement manager menu options: view all orders, edit prices, order more inventory, logout
     global orders
     while True:
         print("Manager Menu:")
@@ -47,10 +43,8 @@ def manager_menu(manager_id):
         if choice == '1':
             view_all_orders(manager_id)
         elif choice == '2':
-            # Implement edit prices functionality
             pass
         elif choice == '3':
-            # Implement order more inventory functionality
             pass
         elif choice == '4':
             break
@@ -61,41 +55,59 @@ def submit_order(customer_id):
     global order_id_counter
     print("Available Products:")
     for product_id, info in products.items():
-        print(f"{product_id}: {info['name']} - ${info['unit_price']:.2f} - Stock: {info['stock']}")
+        print(f"{product_id}: {info['name']} - ${info['unit_price']:.2f}")
     product_id = input("Enter the product ID you want to order: ").strip().upper()
     if product_id in products:
         quantity = int(input("Enter the quantity you want to order: "))
-        if quantity <= products[product_id]['stock']:
-            order_id = order_id_counter
-            order_id_counter += 1
-            order = {
-                'order_id': order_id,
-                'customer_id': customer_id,
-                'product_id': product_id,
-                'quantity': quantity,
-                'order_price': quantity * products[product_id]['unit_price']
-            }
-            orders[order_id] = order
-            print("Order placed successfully!")
-            products[product_id]['stock'] -= quantity
-        else:
-            print("Insufficient stock.")
+        order_id = order_id_counter
+        order_id_counter += 1
+        order_price = quantity * products[product_id]['unit_price']
+        order = {
+            'order_id': order_id,
+            'customer_id': customer_id,
+            'product_id': product_id,
+            'quantity': quantity,
+            'order_price': order_price
+        }
+        orders.append(order)
+        print("Order placed successfully!")
+        update_stock(product_id, quantity)
+        print_order(order)
     else:
         print("Invalid product ID.")
 
-def display_order_history(customer_id):
-    # Implement functionality to display order history for a customer
-    pass
+def update_stock(product_id, quantity):
+    products[product_id]['stock'] -= quantity
+
+def print_order(order):
+    print("Order Details:")
+    print(f"Order ID: {order['order_id']}")
+    print(f"Product ID: {order['product_id']}")
+    print(f"Quantity: {order['quantity']}")
+    print(f"Total Price: ${order['order_price']:.2f}")
+
+def customer_view_orders(customer_id):
+    print("Orders placed by you:")
+    orders_placed = [order for order in orders if order['customer_id'] == customer_id]
+    if orders_placed:
+        for order in orders_placed:
+            print_order(order)
+    else:
+        print("No orders found for this customer.")
 
 def view_all_orders(manager_id):
-    # Implement functionality to view all orders for a manager
-    pass
+    print("All Orders:")
+    if orders:
+        for order in orders:
+            print_order(order)
+    else:
+        print("No orders found.")
 
 def reset():
     global orders
-    orders.clear()  # Clearing all orders
+    orders.clear()  
 
-# Main Program
+#main
 def main():
     global order_id_counter
     quit_program = False
@@ -118,4 +130,5 @@ def main():
         else:
             print("Invalid choice.")
 
-    main()
+
+main()
