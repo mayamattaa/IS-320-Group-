@@ -1,7 +1,3 @@
-
-
-
-
 # Global Variables
 customers = {'customer1_id': 'customer1_pass', 'customer2_id': 'customer2_pass'}
 managers = {'manager_id': 'manager_pass'}
@@ -26,6 +22,7 @@ def login():
     else:
         print("Invalid ID or password.")
         return None, None
+
 #get date 
 import datetime
 import random
@@ -125,24 +122,13 @@ def submit_order(customer_id):
                 'quantity': quantity,
                 'order_price': quantity * products[product_id]['unit_price']
             }
-            orders[order_id] = order
+            orders.append(order)
             print("Order placed successfully!")
             products[product_id]['stock'] -= quantity
         else:
             print("Insufficient stock.")
     else:
         print("Invalid product ID.")
-
-# Do I add in this part?? 
-def main():
-    manager_id = "your_manager_id"  # Replace with actual manager ID
-    manager_menu(manager_id)
-
-# Call the main program
-if __name__ == "__main__":
-    main() 
-
-
 
 def display_order_history(customer_id):
     # Implement functionality to display order history for a customer
@@ -181,5 +167,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-# submit order 
