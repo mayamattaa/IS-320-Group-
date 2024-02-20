@@ -188,8 +188,8 @@ def inventory_reorder():
         print(f'{product_id}: {info["name"]} - Stock: {info["stock"]}')
 
     reorder_option = input('Choose reorder quantity option: \n'
-                           'a. Reorder set quantity of all products \n'
-                           'b. Specify reorder amount for each individual product \n'
+                           'a. Set a simple number for all products \n'
+                           'b. Let a manager specify for each product \n'
                            'c. Set a reorder quantitiy attribute for each product. \n'
                            'Choose an option (a/b/c): ').lower()
     if reorder_option == 'a':
@@ -203,14 +203,12 @@ def inventory_reorder():
             print(f'{info["name"]} replenished with {reorder_quantity} units.')
     elif reorder_option == 'c':
         for product_id, info in products.items():
-            reorder_level = int(input(f'Enter reorder level for {info["name"]}: '))
-            reorder_quantity = int(input(f'Enter reorder quantity for {info["name"]}: '))
-            restock_amount = reorder_quantity - info['stock']
-            info['reorder_level'] = reorder_level
-            info['reorder_quantity'] = reorder_quantity
-            print(f'Reorder attributes set for {info["name"]}: Reorder Level: {reorder_level}, Reorder Quantity: {reorder_quantity}')
-            print(f'{info["name"]} replenished with {restock_amount} units')
-            print('Reorder attributes updated successfully!')
+            min_inventory = int(input(f'Enter the minimum inventory count for {info["name"]}: '))
+            restock_quantity = int(input(f'Enter the desired restocking quantity for {info["name"]}: '))
+            if info['stock'] < min_inventory:
+                restock_amount = restock_quantity - info['stock']
+                info['stock'] += restock_amount
+                print(f'{info["name"]} replenished with {restock_amount} units.')
     else:
         print('Invalid option. Please choose "a", "b", or "c".')
 
