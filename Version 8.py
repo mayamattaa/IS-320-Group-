@@ -60,10 +60,12 @@ def customer_menu(customer_id):
             customer_summary_orders()
         elif choice == '4':
             customer_logout()
+            return  
         elif choice =='5':
             exit()
         else:
             print("Invalid choice.")
+
 
 def customer_logout():
     print("Customer logged out successfully.")
@@ -86,6 +88,7 @@ def manager_menu(manager_id):
             inventory_reorder()
         elif choice == '5':
             manager_logout()
+            return
         elif choice =='6':
             exit()
         else:
