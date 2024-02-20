@@ -113,7 +113,7 @@ def manager_logout(login_type):
         pass
 
 def customer_logout(login_type):
-    if login_type == 1:
+    if login_type == 0:
         logout_desire = input('Do you want to logout? (y/n)')
         if logout_desire.lower() == 'y':
             print('Customer logged out successfully. Goodbye!')
