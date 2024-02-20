@@ -156,16 +156,13 @@ def submit_order(customer_id):
             }
             orders.append(order)
             print('Order placed successfully!')
-            update_stock(product_id, -quantity)  
+            products[product_id]['stock'] -= quantity
             print_order(order)
         else:
             print('Not enough stock available for this product.')
     else:
         print('Invalid product ID.')
-
-def update_stock(product_id, quantity):
-    products[product_id]['stock'] -= quantity
-
+        
 def inventory_reorder():
     global products
     print("Current stock for all products:")
