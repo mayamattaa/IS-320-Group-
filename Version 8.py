@@ -59,7 +59,7 @@ def customer_menu(customer_id):
         elif choice =='3':
             customer_summary_orders()
         elif choice == '4':
-            customer_logout()
+            break
         elif choice =='5':
             exit()
         else:
@@ -112,17 +112,6 @@ def manager_logout(login_type):
     else:
         pass
 
-def customer_logout(login_type):
-    if login_type == 0:
-        logout_desire = input('Do you want to logout? (y/n)')
-        if logout_desire.lower() == 'y':
-            print('Customer logged out successfully. Goodbye!')
-        elif logout_desire.lower() == 'n':
-            pass
-        else:
-            print('Invalid input. Please enter "y" or "n".')
-    else:
-        pass
 def edit_prices():
     global products
     
