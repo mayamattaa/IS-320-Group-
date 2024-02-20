@@ -59,7 +59,7 @@ def customer_menu(customer_id):
         elif choice =='3':
             customer_summary_orders()
         elif choice == '4':
-            customer_logout
+            customer_logout()
         elif choice =='5':
             exit()
         else:
