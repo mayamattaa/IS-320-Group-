@@ -51,8 +51,8 @@ def get_date():
 def customer_menu(customer_id):
     global orders
     while True:
-        print("Customer Menu:")
-        choice = input("1. Submit Order\n2. View Order History\n3. Summary of orders\n4. Logout\n5. Exit\nChoose an option: ")
+        print('Customer Menu:')
+        choice = input('1. Submit Order\n2. View Order History\n3. Summary of orders\n4. Logout\n5. Exit\nChoose an option: ')
         if choice == '1':
             submit_order(customer_id)
         elif choice == '2':
@@ -71,8 +71,8 @@ def customer_summary_orders():
         
 def manager_menu(manager_id):
     while True:
-        print("Manager Menu:")
-        choice = input("1. View All Orders\n2. Manager Order Summary\n3. Edit Prices\n4. Order More Inventory\n5. Logout\n6. Exit\n ")
+        print('Manager Menu:')
+        choice = input('1. View All Orders\n2. Manager Order Summary\n3. Edit Prices\n4. Order More Inventory\n5. Logout\n6. Exit\n ')
         if choice == '1':
             manager_view_orders()
         elif choice == '2':
@@ -95,7 +95,7 @@ def manager_view_orders():
         for order in orders:
             print_order(order)
     else:
-        print("No orders found.")
+        print('No orders found.')
         
 def manager_order_summary():
     pass
@@ -105,7 +105,7 @@ def manager_logout(login_type):
     if login_type == 1:
         logout_desire = input('Do you want to logout? (y/n)')
         if logout_desire.lower() == 'y':
-            print("Manager logged out successfully. Goodbye!")
+            print('Manager logged out successfully. Goodbye!')
         elif logout_desire.lower() == 'n':
             pass
         else:
@@ -117,7 +117,7 @@ def manager_logout(login_type):
 def edit_prices():
     global products
     
-    print("Available Products and Current Prices:")
+    print('Available Products and Current Prices:')
     for product_id, info in products.items():
         print(f"{product_id}: {info['name']} - ${info['unit_price']:.2f}")
 
@@ -127,23 +127,23 @@ def edit_prices():
     # Check if the entered product ID exists
     if product_id in products:
         # Get the new unit price 
-        new_price = float(input("Enter the new unit price: "))
+        new_price = float(input('Enter the new unit price: '))
 
         # Update product unit price
         products[product_id]['unit_price'] = new_price
 
-        print(f"Price for Product ID {product_id} updated to ${new_price:.2f}")
+        print(f'Price for Product ID {product_id} updated to ${new_price:.2f}')
     else:
-        print(f"Product ID {product_id} not found")
+        print(f'Product ID {product_id} not found')
 
 def submit_order(customer_id):
     global order_id_counter
-    print("Available Products:")
+    print('Available Products:')
     for product_id, info in products.items():
         print(f"{product_id}: {info['name']} - ${info['unit_price']:.2f} - Stock: {info['stock']}")
     product_id = input("Enter the product ID you want to order: ")
     if product_id in products:
-        quantity = int(input("Enter the quantity you want to order: "))
+        quantity = int(input('Enter the quantity you want to order: '))
         if quantity <= products[product_id]['stock']:
             order_id = order_id_counter
             order_id_counter += 1
@@ -161,20 +161,20 @@ def submit_order(customer_id):
                 'date': order_date
             }
             orders.append(order)
-            print("Order placed successfully!")
+            print('Order placed successfully!')
             update_stock(product_id, -quantity)  
             print_order(order)
         else:
-            print("Not enough stock available for this product.")
+            print('Not enough stock available for this product.')
     else:
-        print("Invalid product ID.")
+        print('Invalid product ID.')
 
 def update_stock(product_id, quantity):
     products[product_id]['stock'] -= quantity
 
 def inventory_reorder():
     global products
-    print("Current stock for all products:")
+    print('Current stock for all products:')
     for product_id, info in products.items():
         print(f'{product_id}: {info["name"]} - Stock: {info["stock"]}')
 
@@ -217,14 +217,14 @@ def print_order(order):
     print(f"Total Price: ${order['order_price']:.2f}")
 
 def customer_view_orders(customer_id):
-    print("Orders placed by you:")
+    print('Orders placed by you:')
     orders_placed = [order for order in orders if order['customer_id'] == customer_id]
     if orders_placed:
         for order in orders_placed:
             print_order(order)
     
     else:
-        print("No orders found for this customer.")
+        print('No orders found for this customer.')
 
 def reset():
     global orders
@@ -235,10 +235,10 @@ def main():
     global order_id_counter
     quit_program = False
     while not quit_program:
-        print("Main Menu:")
-        print("1. Login")
-        print("2. Quit")
-        choice = input("Choose an option: ")
+        print('Main Menu:')
+        print('1. Login')
+        print('2. Quit')
+        choice = input('Choose an option: ')
         
         if choice == '1':
             user_type, user_id = login()
@@ -247,9 +247,9 @@ def main():
             elif user_type == 'manager':
                 manager_menu(user_id)
             else:
-                print("Invalid ID or password.")
+                print('Invalid ID or password.')
         elif choice == '2':
             quit_program = True
         else:
-            print("Invalid choice.")
+            print('Invalid choice.')
 main()
