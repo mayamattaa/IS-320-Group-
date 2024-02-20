@@ -103,32 +103,9 @@ def manager_view_orders():
 def manager_order_summary():
     pass
 
-def manager_logout(login_type):
-    if login_type == 'manager':
-        logout_desire = input('Do you want to logout? (y/n)')
-        if logout_desire.lower() == 'y':
-            print('Manager logged out successfully. Goodbye!')
-            main()
-        elif logout_desire.lower() == 'n':
-            pass
-        else:
-            print('Invalid input. Please enter "y" or "n".')
-    else:
-        pass
-
-def customer_logout(login_type):
-    if login_type == 'customer':
-        logout_desire = input('Do you want to logout? (y/n)')
-        if logout_desire.lower() == 'y':
-            print('Customer logged out successfully. Goodbye!')
-            main()
-        elif logout_desire.lower() == 'n':
-            pass
-        else:
-            print('Invalid input. Please enter "y" or "n".')
-    else:
-        pass
-
+def manager_logout():
+    print("Manager logged out successfully.")
+    return login()
 
 def edit_prices():
     global products
