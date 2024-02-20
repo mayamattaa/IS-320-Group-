@@ -39,7 +39,7 @@ def login():
         print('Invalid login type. Choose 1 for manager, or 0 for customer.')
         return None, None
 
-#get date
+#get date 
 def get_date():
     start = datetime.date(2022,1,1)
     end = datetime.date(2023,12,31)
@@ -195,9 +195,12 @@ def inventory_reorder():
         for product_id, info in products.items():
             reorder_level = int(input(f'Enter reorder level for {info["name"]}: '))
             reorder_quantity = int(input(f'Enter reorder quantity for {info["name"]}: '))
+            restock_amount = reorder_quantity - info['stock']
             info['reorder_level'] = reorder_level
             info['reorder_quantity'] = reorder_quantity
             print(f'Reorder attributes set for {info["name"]}: Reorder Level: {reorder_level}, Reorder Quantity: {reorder_quantity}')
+            print(f'{info["name"]} replenished with {restock_amount} units')
+            print('Reorder attributes updated successfully!')
     else:
         print('Invalid option. Please choose "a", "b", or "c".')
 
