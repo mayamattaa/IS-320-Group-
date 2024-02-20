@@ -176,7 +176,7 @@ def inventory_reorder():
     global products
     print("Current stock for all products:")
     for product_id, info in products.items():
-        print(f'{product_id}: {info['name']} - Stock: {info['stock']}')
+        print(f'{product_id}: {info["name"]} - Stock: {info["stock"]}')
 
     reorder_option = input('Choose reorder quantity option: \n'
                            'a. Set a simple number for all products \n'
