@@ -69,7 +69,6 @@ def customer_menu(customer_id):
 
 def customer_logout():
     print("Customer logged out successfully.")
-    return main()
 
 def customer_summary_orders(): 
     pass
@@ -108,7 +107,6 @@ def manager_order_summary():
 
 def manager_logout():
     print("Manager logged out successfully.")
-    return main()
 
 def edit_prices():
     global products
