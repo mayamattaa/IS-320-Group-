@@ -87,17 +87,16 @@ def manager_menu(manager_id):
         else:
             print("Invalid choice.")
 
-def manager_view_orders(): 
+def manager_view_orders():
     global orders
-    if not orders:
-        print("No orders found.")
-    else:
-        print("All Orders from All Customers:")
+    print("Orders placed by all customers:")
+    if orders:
         for order in orders:
-            print(f'Product Name: {order['order_name']}, Order ID: {order['order_id']}, Date: {order['date']}, Customer ID: {order['customer_id']}, Product ID: {order['product_id']}, Quantity: {order['quantity']}')
-
+            print_order(order)
+    else:
+        print("No orders found.")
+        
 def manager_order_summary():
-    # Leave the implementation blank for now
     pass
 
 def edit_prices():
