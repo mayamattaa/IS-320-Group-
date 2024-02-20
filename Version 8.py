@@ -174,14 +174,14 @@ def update_stock(product_id, quantity):
 
 def inventory_reorder():
     global products
-    print('Current stock for all products:')
+    print("Current stock for all products:")
     for product_id, info in products.items():
         print(f'{product_id}: {info["name"]} - Stock: {info["stock"]}')
 
     reorder_option = input('Choose reorder quantity option: \n'
                            'a. Set a simple number for all products \n'
                            'b. Let a manager specify for each product \n'
-                           'c. Set a reorder quantitiy attribute for each product.'
+                           'c. Set a reorder quantitiy attribute for each product. \n'
                            'Choose an option (a/b/c): ').lower()
     if reorder_option == 'a':
         reorder_quantity = int(input('Enter the reorder quantity for all products: '))
@@ -194,15 +194,15 @@ def inventory_reorder():
             print(f'{info["name"]} replenished with {reorder_quantity} units.')
     elif reorder_option == 'c':
         for product_id, info in products.items():
-            if 'reorder_quantity' in info:
-                reorder_quantity = info['reorder_quantity']
+            for product_id, info in products.items():
+                reorder_quantity = int(input(f'Enter the reorder quantity for {info["name"]}: '))
                 info['stock'] += reorder_quantity
                 print(f'{info["name"]} replenished with {reorder_quantity} units.')
             else: 
                 print(f'No reorder quantity specified for {info["name"]}.')
                 #enter a reprompt 
-        else:
-            print('Invalid option. Please choose "a", "b", or "c".')
+    else:
+        print('Invalid option. Please choose "a", "b", or "c".')
 
 
 def print_order(order):
