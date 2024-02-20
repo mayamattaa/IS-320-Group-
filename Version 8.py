@@ -233,18 +233,21 @@ def main():
         print('Main Menu:')
         print('1. Login')
         print('2. Quit')
-        choice = input('Choose an option: ')
         
-        if choice == '1':
-            user_type, user_id = login()
-            if user_type == 'customer':
-                customer_menu(user_id)
-            elif user_type == 'manager':
-                manager_menu(user_id)
+        try:
+            choice = input('Choose an option: ')
+            if choice == '1':
+                user_type, user_id = login()
+                if user_type == 'customer':
+                    customer_menu(user_id)
+                elif user_type == 'manager':
+                    manager_menu(user_id)
+                else:
+                    print('Invalid ID or password.')
+            elif choice == '2':
+                quit_program = True
             else:
-                print('Invalid ID or password.')
-        elif choice == '2':
-            quit_program = True
-        else:
-            print('Invalid choice.')
+                print('Invalid choice.')
+        except ValueError:
+            print('Invalid input. Please enter a number.')
 main()
