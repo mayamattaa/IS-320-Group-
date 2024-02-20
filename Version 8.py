@@ -59,12 +59,16 @@ def customer_menu(customer_id):
         elif choice =='3':
             customer_summary_orders()
         elif choice == '4':
-            break
+            customer_logout()
         elif choice =='5':
             exit()
         else:
             print("Invalid choice.")
-            
+
+def customer_logout():
+    print("Customer logged out successfully.")
+    return login()
+
 def customer_summary_orders(): 
     pass
         
@@ -99,18 +103,10 @@ def manager_view_orders():
 def manager_order_summary():
     pass
 
-def manager_logout(login_type):
-    #says to wait until the end of the project. Will keep what I think will be the code
-    if login_type == 1:
-        logout_desire = input('Do you want to logout? (y/n)')
-        if logout_desire.lower() == 'y':
-            print('Manager logged out successfully. Goodbye!')
-        elif logout_desire.lower() == 'n':
-            pass
-        else:
-            print('Invalid input. Please enter "y" or "n".')
-    else:
-        pass
+def manager_logout():
+    print("Manager logged out successfully.")
+    return login()
+
 
 def edit_prices():
     global products
@@ -177,8 +173,8 @@ def inventory_reorder():
         print(f'{product_id}: {info["name"]} - Stock: {info["stock"]}')
 
     reorder_option = input('Choose reorder quantity option: \n'
-                           'a. Set a simple number for all products \n'
-                           'b. Let a manager specify for each product \n'
+                           'a. Reorder set quantity of all products \n'
+                           'b. Specify reorder amount for each individual product \n'
                            'c. Set a reorder quantitiy attribute for each product. \n'
                            'Choose an option (a/b/c): ').lower()
     if reorder_option == 'a':
@@ -192,12 +188,14 @@ def inventory_reorder():
             print(f'{info["name"]} replenished with {reorder_quantity} units.')
     elif reorder_option == 'c':
         for product_id, info in products.items():
-            min_inventory = int(input(f'Enter the minimum inventory count for {info["name"]}: '))
-            restock_quantity = int(input(f'Enter the desired restocking quantity for {info["name"]}: '))
-            if info['stock'] < min_inventory:
-                restock_amount = restock_quantity - info['stock']
-                info['stock'] += restock_amount
-                print(f'{info["name"]} replenished with {restock_amount} units.')
+            reorder_level = int(input(f'Enter reorder level for {info["name"]}: '))
+            reorder_quantity = int(input(f'Enter reorder quantity for {info["name"]}: '))
+            restock_amount = reorder_quantity - info['stock']
+            info['reorder_level'] = reorder_level
+            info['reorder_quantity'] = reorder_quantity
+            print(f'Reorder attributes set for {info["name"]}: Reorder Level: {reorder_level}, Reorder Quantity: {reorder_quantity}')
+            print(f'{info["name"]} replenished with {restock_amount} units')
+            print('Reorder attributes updated successfully!')
     else:
         print('Invalid option. Please choose "a", "b", or "c".')
 
