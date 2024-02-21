@@ -184,20 +184,22 @@ def inventory_reorder():
             info['stock'] += reorder_quantity
             print(f'{info["name"]} replenished with {reorder_quantity} units.')
     elif reorder_option == 'c':
-    for product_id, info in products.items():
-        reorder_level = int(input(f'Enter reorder level for {info["name"]}: '))
-        reorder_quantity = int(input(f'Enter reorder quantity for {info["name"]}: '))
+        for product_id, info in products.items():
+            reorder_level = int(input(f'Enter reorder level for {info["name"]}: '))
+            reorder_quantity = int(input(f'Enter reorder quantity for {info["name"]}: '))
         
-        if reorder_quantity > info['stock']:
-            restock_amount = reorder_quantity - info['stock']
-            info['reorder_level'] = reorder_level
-            info['reorder_quantity'] = reorder_quantity
-            info['stock'] += restock_amount  # Update stock with the restock_amount
-            print(f'Reorder attributes set for {info["name"]}: Reorder Level: {reorder_level}, Reorder Quantity: {reorder_quantity}')
-            print(f'{info["name"]} replenished with {restock_amount} units')
-            print('Reorder attributes updated successfully!')
-        else:
-            print(f'No replenishment needed for {info["name"]}. Reorder quantity is not greater than current stock.')
+            if reorder_quantity > info['stock']:
+                restock_amount = reorder_quantity - info['stock']
+                info['reorder_level'] = reorder_level
+                info['reorder_quantity'] = reorder_quantity
+                info['stock'] += restock_amount  
+                print(f'Reorder attributes set for {info["name"]}: Reorder Level: {reorder_level}, Reorder Quantity: {reorder_quantity}')
+                print(f'{info["name"]} replenished with {restock_amount} units')
+                print('Reorder attributes updated successfully!')
+            else:
+                print(f'No replenishment needed for {info["name"]}. Reorder quantity is not greater than current stock.')
+
+
 
 
 def print_order(order):
