@@ -72,24 +72,25 @@ def customer_menu(customer_id):
 def customer_logout():
     print("Customer logged out successfully.")
 
-def customer_summary_orders(): 
-    global orders, products
-    total_revenue_per_product = {}
-    total_orders_per_product = {}
+def customer_summary_orders():
+    global orders
+    total_expense_per_product = {}
+    
     for order in orders:
         product_id = order['product_id']
-        if product_id in total_revenue_per_product:
-            total_revenue_per_product[product_id] += order['order_price']
-            total_orders_per_product[product_id] += 1
+        order_price = order['order_price']
+        
+        if product_id in total_expense_per_product:
+            total_expense_per_product[product_id] += order_price
         else:
-            total_revenue_per_product[product_id] = order['order_price']
-            total_orders_per_product[product_id] = 1
-
+            total_expense_per_product[product_id] = order_price
+  
     print("Customer Summary Report")
-    for product_id, total_revenue in total_revenue_per_product.items():
-        average_revenue_per_order = total_revenue / total_orders_per_product[product_id]
-        print(f"Total revenue for product {product_id}: {total_revenue:.2f}")
-        print(f"Average revenue per order for product {product_id}: {average_revenue_per_order:.2f}")
+    for product_id, total_expense in total_expense_per_product.items():
+        print(f"Total expense per product {product_id}: {total_expense:.2f}")
+
+customer_summary_orders()
+
         
 def manager_menu(manager_id):
     while True:
