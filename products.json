@@ -1,0 +1,23 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Product A",
+      "price": 20.0,
+      "in_stock": true
+    },
+    {
+      "id": 2,
+      "name": "Product B",
+      "price": 30.0,
+      "in_stock": false
+    },
+    {
+      "id": 3,
+      "name": "Product C",
+      "price": 25.0,
+      "in_stock": true
+    }
+  ],
+  "orders": []
+}
